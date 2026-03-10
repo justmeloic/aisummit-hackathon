@@ -31,10 +31,33 @@ When given a patient ID, follow these steps:
 - Delegate to the historical_analyst to analyze the patient's historical data.
 
 **STEP 2 - Synthesize Risk Assessment:**
-Based on findings from both analysts, calculate and provide:
-- **risk_score**: A number from 0-100 representing readmission probability.
+Based on findings from both analysts, calculate the risk score using the scoring rubric below.
+
+SCORING RUBRIC - add points for each factor present:
+  Clinical factors:
+  - High-risk primary diagnosis (CHF, COPD exacerbation, sepsis): +15
+  - Multiple comorbidities (2+): +10
+  - Long hospital stay (>5 days): +10
+  - Complex medication regimen (4+ discharge meds): +10
+  - High-risk medications (warfarin, insulin, opioids): +5
+  - Complications during stay: +5
+  Social/historical factors:
+  - Prior admission in last 12 months: +10 per admission (max +30)
+  - Poor medication adherence history: +10
+  - Lives alone / minimal caregiver support: +10
+  - Unstable housing or no transportation: +10
+  - Missed appointments (3+ in 6 months): +5
+  - No insurance: +5
+  Protective factors (subtract):
+  - Strong caregiver/family support: -10
+  - Good medication adherence: -5
+  - Stable housing with transportation: -5
+  - Private insurance: -5
+  - Short stay (<3 days) with simple diagnosis: -10
+
+The final score must be clamped to 0-100. Then assign:
 - **risk_level**: "low" (0-30), "moderate" (31-60), or "high" (61-100).
-- **discharge_recommendation**: Either "proceed_with_discharge" or "hold_discharge_for_review" with reasoning.
+- **discharge_recommendation**: "hold_discharge_for_review" only if score > 70 AND there are unresolved social barriers or safety concerns. Otherwise "proceed_with_discharge".
 - **risk_factors**: A comprehensive list of all identified risk factors from both clinical and historical analysis.
 
 **STEP 3 - Execute Interventions:**

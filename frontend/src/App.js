@@ -67,16 +67,18 @@ function App() {
 
           <form onSubmit={handleSubmit} className="form">
             <div className="input-group">
-              <label htmlFor="patientId">Patient ID</label>
-              <input
-                type="text"
+              <label htmlFor="patientId">Select Patient</label>
+              <select
                 id="patientId"
                 value={patientId}
                 onChange={(e) => setPatientId(e.target.value)}
-                placeholder="e.g., P12345, P67890"
                 required
-                autoComplete="off"
-              />
+              >
+                <option value="" disabled>Select a patient to assess...</option>
+                <option value="P12345">John Smith (ID: P12345) - Age 72</option>
+                <option value="P67890">Mary Johnson (ID: P67890) - Age 58</option>
+                <option value="P11111">Robert Williams (ID: P11111) - Age 81</option>
+              </select>
             </div>
             <button type="submit" disabled={loading || !patientId}>
               {loading ? (

@@ -18,22 +18,31 @@ An AI-powered system that automates the identification of high-risk patients at 
 ## Quick Start
 
 ### Backend
+
 ```bash
 cd backend
-pip install -r requirements.txt
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
 uvicorn src.main:app --reload --port 8000
 ```
 
+The API will be available at http://localhost:8000
+
 ### Frontend
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
+The app will be available at http://localhost:3000
+
 ### Run Agent with ADK Web UI
 ```bash
 cd backend
+source .venv/bin/activate
 adk web src/readmission_prevention_agent
 ```
 

@@ -1,0 +1,51 @@
+{
+  "resourceType": "Bundle",
+  "id": "jeffery-brown-simplified",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "349720c1-0627-e77a-1619-bb11b1530e96",
+        "name": [{"family": "Brown", "given": ["Jeffery"]}],
+        "gender": "male",
+        "birthDate": "2010-06-28",
+        "extension": [
+            {
+                "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
+                "valueString": "Not Hispanic or Latino"
+            }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c1",
+        "clinicalStatus": {"coding": [{"code": "active"}]},
+        "code": {"text": "Acute bronchitis (disorder)"},
+        "subject": {"reference": "Patient/349720c1-0627-e77a-1619-bb11b1530e96"}
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "soc-1",
+        "status": "final",
+        "code": {"text": "Socioeconomic status"},
+        "valueString": "Low socioeconomic background; Medicaid recipient",
+        "subject": {"reference": "Patient/349720c1-0627-e77a-1619-bb11b1530e96"}
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e1",
+        "status": "finished",
+        "class": {"code": "AMB"},
+        "type": [{"text": "Discharge from hospital stay"}],
+        "period": {"start": "2026-03-05T10:00:00Z", "end": "2026-03-10T14:00:00Z"}
+      }
+    }
+  ]
+}

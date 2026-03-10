@@ -1,0 +1,27 @@
+DISCHARGE SUMMARY
+
+PATIENT NAME: Bradly Fisher
+GENDER: Male
+DATE OF BIRTH: 1966-03-27
+
+HOSPITAL COURSE:
+Mr. Fisher was admitted for an inpatient stay from 2026-03-01 to 2026-03-10 (Total duration: 9 days). The primary reason for admission was management of his chronic conditions.
+
+DIAGNOSES:
+- Congestive heart failure (active)
+- Chronic obstructive pulmonary disease (COPD) (active)
+- Housing unsatisfactory (active)
+
+MEDICATIONS PRESCRIBED AT DISCHARGE:
+- Furosemide 40 MG (Active)
+- Lisinopril 10 MG (Active)
+- Metformin 500 MG (Active)
+- Warfarin Sodium 5 MG (Active) - HIGH RISK: Monitor INR closely.
+- Atorvastatin 20 MG (Active)
+
+SOCIAL DETERMINANTS OF HEALTH:
+- Noted insurance status: NO_INSURANCE.
+- Noted unsatisfactory housing conditions.
+
+DISCHARGE INSTRUCTIONS:
+Follow up with primary care physician within 48 hours. Continue all medications as prescribed. Monitor weight daily and report any sudden increases. Avoid smoking and maintain a heart-healthy diet.

@@ -1,0 +1,19 @@
+DISCHARGE SUMMARY
+
+PATIENT: Alice Johnson
+DOB: 1985-06-15
+DATE OF ADMISSION: 2026-03-08
+DATE OF DISCHARGE: 2026-03-10
+
+ADMITTING DIAGNOSIS: Severe acute sinusitis.
+
+HOSPITAL COURSE: 
+Alice was admitted for IV antibiotics for acute sinusitis that was not responding to oral therapy. She responded quickly to IV treatment and was transitioned back to oral antibiotics on day 2. She remained stable, hydrated, and afebrile.
+
+DISCHARGE MEDICATIONS: 
+- Amoxicillin-Clavulanate 875 mg twice daily for 7 days.
+
+FOLLOW-UP PLAN: 
+- Follow up with primary care physician in 2 weeks.
+
+STABILITY AT DISCHARGE: Stable. Alice is in good health, has strong family support, and reliable health insurance. No complex chronic conditions were noted.

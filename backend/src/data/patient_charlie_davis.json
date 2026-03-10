@@ -1,0 +1,139 @@
+{
+  "resourceType": "Bundle",
+  "id": "charlie-davis-high-risk",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "p3",
+        "name": [
+          {
+            "family": "Davis",
+            "given": [
+              "Charlie"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1950-01-10"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Congestive heart failure"
+        },
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c2",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c3",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Chronic obstructive pulmonary disease"
+        },
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m1",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Warfarin Sodium 5 MG"
+        },
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m2",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Furosemide 40 MG"
+        },
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e1",
+        "status": "finished",
+        "class": {
+          "code": "IMP"
+        },
+        "type": [
+          {
+            "text": "Inpatient stay"
+          }
+        ],
+        "period": {
+          "start": "2026-02-25T10:00:00Z",
+          "end": "2026-03-10T09:00:00Z"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs1",
+        "status": "final",
+        "code": {
+          "text": "Insurance Status"
+        },
+        "valueString": "NO_INSURANCE",
+        "subject": {
+          "reference": "Patient/p3"
+        }
+      }
+    }
+  ]
+}

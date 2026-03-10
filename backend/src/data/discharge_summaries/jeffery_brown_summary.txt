@@ -1,0 +1,21 @@
+DISCHARGE SUMMARY
+
+PATIENT NAME: Jeffery Brown
+GENDER: Male
+DATE OF BIRTH: 2010-06-28
+
+HOSPITAL COURSE:
+Jeffery Brown, a 15-year-old male, was admitted for a hospital stay from 2026-03-05 to 2026-03-10 (Total duration: 5 days). The stay was primarily focused on the management of an acute respiratory condition.
+
+DIAGNOSES:
+- Acute bronchitis (active condition).
+
+SOCIAL DETERMINANTS OF HEALTH:
+- Socioeconomic status: Low socioeconomic background; Medicaid recipient.
+- Ethnicity: Not Hispanic or Latino.
+
+DISCHARGE DISPOSITION:
+- Discharged from hospital stay on 2026-03-10.
+
+FOLLOW-UP:
+Routine follow-up with pediatrician within one week. Monitor for persistent cough or fever.

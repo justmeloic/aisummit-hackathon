@@ -1,0 +1,88 @@
+{
+  "resourceType": "Bundle",
+  "id": "bob-smith-medium-risk",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "p2",
+        "name": [
+          {
+            "family": "Smith",
+            "given": [
+              "Bob"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1955-08-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Chronic obstructive pulmonary disease"
+        },
+        "subject": {
+          "reference": "Patient/p2"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m1",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Albuterol inhaler"
+        },
+        "subject": {
+          "reference": "Patient/p2"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e1",
+        "status": "finished",
+        "class": {
+          "code": "IMP"
+        },
+        "type": [
+          {
+            "text": "Inpatient stay"
+          }
+        ],
+        "period": {
+          "start": "2026-03-01T08:00:00Z",
+          "end": "2026-03-08T14:00:00Z"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs1",
+        "status": "final",
+        "code": {
+          "text": "Insurance Status"
+        },
+        "valueString": "MEDICARE",
+        "subject": {
+          "reference": "Patient/p2"
+        }
+      }
+    }
+  ]
+}

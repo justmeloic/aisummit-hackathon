@@ -1,0 +1,25 @@
+DISCHARGE SUMMARY
+
+PATIENT: Charlie Davis
+DOB: 1950-01-10
+DATE OF ADMISSION: 2026-02-25
+DATE OF DISCHARGE: 2026-03-10
+
+ADMITTING DIAGNOSIS: Acute on chronic systolic heart failure exacerbation, uncontrolled diabetes.
+
+HOSPITAL COURSE: 
+Charlie was admitted for severe leg edema and shortness of breath. He required aggressive diuresis with IV furosemide. His course was complicated by poorly controlled blood sugars and a mild COPD flare-up. His discharge was delayed multiple times due to social concerns and inability to secure home services. He is now compensated but remains at very high risk for recurrence.
+
+DISCHARGE MEDICATIONS: 
+- Warfarin Sodium 5 mg daily (requires frequent INR monitoring).
+- Furosemide 40 mg twice daily.
+- Metformin 1000 mg twice daily.
+- Lisinopril 20 mg daily.
+- Spiriva HandiHaler once daily.
+
+FOLLOW-UP PLAN: 
+- Cardiology appointment in 3 days.
+- Anticoagulation clinic for INR check tomorrow.
+- Endocrinology appointment in 1 week.
+
+STABILITY AT DISCHARGE: Marginal. Charlie has no insurance and limited social support. He has multiple high-risk medications and complex chronic conditions. His risk for readmission within 30 days is exceptionally high.

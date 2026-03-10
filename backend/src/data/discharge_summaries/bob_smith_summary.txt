@@ -1,0 +1,21 @@
+DISCHARGE SUMMARY
+
+PATIENT: Bob Smith
+DOB: 1955-08-22
+DATE OF ADMISSION: 2026-03-01
+DATE OF DISCHARGE: 2026-03-08
+
+ADMITTING DIAGNOSIS: Acute exacerbation of COPD.
+
+HOSPITAL COURSE: 
+Bob was admitted with significant shortness of breath and wheezing. He required supplemental oxygen for the first 4 days and multiple nebulizer treatments. His stay was somewhat prolonged due to slow recovery of respiratory function. He is now baseline and able to walk short distances without supplemental oxygen.
+
+DISCHARGE MEDICATIONS: 
+- Prednisone 40 mg daily for 5 days.
+- Albuterol inhaler 2 puffs every 4 hours as needed.
+- Spiriva HandiHaler once daily.
+
+FOLLOW-UP PLAN: 
+- Pulmonology appointment in 1 week.
+
+STABILITY AT DISCHARGE: Improved but remains fragile. Bob lives alone and has some difficulty with transportation to appointments. His chronic COPD puts him at a moderate risk for readmission if he develops another respiratory infection.

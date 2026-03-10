@@ -1,0 +1,178 @@
+{
+  "resourceType": "Bundle",
+  "id": "bradly-fisher-simplified",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "c8114bff-6bab-8353-597d-4f155f5f1c3e",
+        "name": [
+          {
+            "family": "Fisher",
+            "given": [
+              "Bradly"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1966-03-27"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Congestive heart failure (disorder)"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c2",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Housing unsatisfactory (finding)"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c3",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Chronic obstructive pulmonary disease (disorder)"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m1",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Furosemide 40 MG"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m2",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Lisinopril 10 MG"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m3",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Metformin 500 MG"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m4",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Warfarin Sodium 5 MG"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "m5",
+        "status": "active",
+        "medicationCodeableConcept": {
+          "text": "Atorvastatin 20 MG"
+        },
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e1",
+        "status": "finished",
+        "class": {
+          "code": "IMP"
+        },
+        "type": [
+          {
+            "text": "Inpatient stay"
+          }
+        ],
+        "period": {
+          "start": "2026-03-01T08:00:00Z",
+          "end": "2026-03-10T12:00:00Z"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-ins",
+        "status": "final",
+        "code": {
+          "text": "Insurance Status"
+        },
+        "valueString": "NO_INSURANCE",
+        "subject": {
+          "reference": "Patient/c8114bff-6bab-8353-597d-4f155f5f1c3e"
+        }
+      }
+    }
+  ]
+}

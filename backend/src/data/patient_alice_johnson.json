@@ -1,0 +1,75 @@
+{
+  "resourceType": "Bundle",
+  "id": "alice-johnson-low-risk",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "p1",
+        "name": [
+          {
+            "family": "Johnson",
+            "given": [
+              "Alice"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1985-06-15"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "c1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Acute sinusitis"
+        },
+        "subject": {
+          "reference": "Patient/p1"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "e1",
+        "status": "finished",
+        "class": {
+          "code": "IMP"
+        },
+        "type": [
+          {
+            "text": "Inpatient stay"
+          }
+        ],
+        "period": {
+          "start": "2026-03-08T10:00:00Z",
+          "end": "2026-03-10T11:00:00Z"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs1",
+        "status": "final",
+        "code": {
+          "text": "Insurance Status"
+        },
+        "valueString": "PRIVATE_INSURANCE",
+        "subject": {
+          "reference": "Patient/p1"
+        }
+      }
+    }
+  ]
+}

@@ -35,42 +35,83 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>🏥 CarePath AI</h1>
-      <p className="subtitle">
-        AI-powered patient readmission risk assessment
-      </p>
-
-      <form onSubmit={handleSubmit} className="form">
-        <div className="input-group">
-          <label htmlFor="patientId">Patient ID</label>
-          <input
-            type="text"
-            id="patientId"
-            value={patientId}
-            onChange={(e) => setPatientId(e.target.value)}
-            placeholder="Enter patient ID (e.g., P12345)"
-            required
-          />
+    <>
+      <nav className="top-bar">
+        <div className="top-bar-left">
+          <span className="logo">🏥 CarePath AI</span>
         </div>
-        <button type="submit" disabled={loading || !patientId}>
-          {loading ? 'Assessing Risk...' : 'Assess Readmission Risk'}
-        </button>
-      </form>
-
-      {error && (
-        <div className="error">
-          <strong>Error:</strong> {error}
+        <div className="top-bar-right">
+          <div className="nav-items">
+            <span>Dashboard</span>
+            <span>Patients</span>
+            <span>Reports</span>
+          </div>
+          <div className="user-profile">
+            <div className="avatar">JD</div>
+            <div className="user-info">
+              <span className="user-name">Dr. Jane Doe</span>
+              <span className="user-role">Cardiology Dept</span>
+            </div>
+          </div>
         </div>
-      )}
+      </nav>
 
-      {result && (
-        <div className="result">
-          <h2>Risk Assessment Result</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
+      <div className="app-wrapper">
+        <div className="container">
+          <h1>
+            <span role="img" aria-label="hospital" style={{ fontSize: '1.2em' }}>🏥</span> CarePath AI
+          </h1>
+          <p className="subtitle">
+            AI-powered patient readmission risk assessment
+          </p>
+
+          <form onSubmit={handleSubmit} className="form">
+            <div className="input-group">
+              <label htmlFor="patientId">Patient ID</label>
+              <input
+                type="text"
+                id="patientId"
+                value={patientId}
+                onChange={(e) => setPatientId(e.target.value)}
+                placeholder="e.g., P12345, P67890"
+                required
+                autoComplete="off"
+              />
+            </div>
+            <button type="submit" disabled={loading || !patientId}>
+              {loading ? (
+                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <svg className="spinner" viewBox="0 0 50 50" style={{ width: '20px', height: '20px', animation: 'spin 1s linear infinite' }}>
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 31.4" opacity="0.3"></circle>
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 100" strokeDashoffset="0"></circle>
+                  </svg>
+                  Assessing Risk...
+                </span>
+              ) : (
+                'Assess Readmission Risk'
+              )}
+            </button>
+          </form>
+
+          {error && (
+            <div className="error">
+              <span role="img" aria-label="error" style={{ marginRight: '8px' }}>⚠️</span>
+              <strong>Error:</strong> {error}
+            </div>
+          )}
+
+          {result && (
+            <div className="result">
+              <h2>
+                <span role="img" aria-label="analytics" style={{ marginRight: '8px' }}>📊</span>
+                Assessment Result
+              </h2>
+              <pre>{JSON.stringify(result, null, 2)}</pre>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   )
 }
 

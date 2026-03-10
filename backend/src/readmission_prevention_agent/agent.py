@@ -55,7 +55,7 @@ SCORING RUBRIC - add points for each factor present:
   - Private insurance: -5
   - Short stay (<3 days) with simple diagnosis: -10
 
-The final score must be clamped to 0-100. Then assign:
+The final score must be clamped to 5-100 (minimum score is always 5, since no patient has zero risk). Then assign:
 - **risk_level**: "low" (0-30), "moderate" (31-60), or "high" (61-100).
 - **discharge_recommendation**: "hold_discharge_for_review" only if score > 70 AND there are unresolved social barriers or safety concerns. Otherwise "proceed_with_discharge".
 - **risk_factors**: A comprehensive list of all identified risk factors from both clinical and historical analysis.

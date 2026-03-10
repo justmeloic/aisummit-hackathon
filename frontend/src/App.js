@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🏥 Readmission Prevention Agent</h1>
+      <h1>🏥 CarePath AI</h1>
       <p className="subtitle">
         AI-powered patient readmission risk assessment
       </p>

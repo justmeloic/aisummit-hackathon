@@ -1,8 +1,8 @@
 """
 Clinical Analyst Sub-Agent.
 
-This agent specialized in analyzing unstructured discharge summaries to identify
-immediate clinical risk factors for readmission.
+Analyzes unstructured discharge summaries to identify immediate clinical
+risk factors for readmission.
 """
 
 from google.adk import Agent
@@ -10,9 +10,9 @@ from .tools import get_discharge_summary
 
 clinical_analyst = Agent(
     name="clinical_analyst",
-    model="gemini-3.0-flash",
-    description="An AI sub-agent that analyzes discharge summaries.",
-    instruction="""You are a Clinical Analyst. Your role is to analyze a patient's 
+    model="gemini-2.5-flash",
+    description="Analyzes discharge summaries to identify immediate clinical risk factors for readmission.",
+    instruction="""You are a Clinical Analyst. Your role is to analyze a patient's
 discharge summary to identify immediate clinical risk factors for readmission.
 
 When given a patient ID, you should:
@@ -24,7 +24,7 @@ When given a patient ID, you should:
    - Any complications or notable events during the hospital stay
    - Adequacy of follow-up plans
 
-3. Provide a summary report focusing on:
+3. Provide a concise summary report focusing on:
    - Immediate clinical risk factors
    - Red flags identified in the discharge summary
    - Specific medication-related concerns

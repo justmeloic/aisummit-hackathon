@@ -1,6 +1,6 @@
-# Mock Patient Data for Development
-
+"""
 This module provides sample patient data for testing the Readmission Prevention Agent.
+"""
 
 PATIENTS_DB = {
     "P12345": {

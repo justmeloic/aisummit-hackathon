@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-/** Strip markdown bold markers and clean up agent output artifacts */
 function cleanText(text) {
   if (!text) return ''
   return text
@@ -10,7 +9,6 @@ function cleanText(text) {
     .trim()
 }
 
-/** Extract just the human-readable part, dropping raw JSON confirmation blobs */
 function cleanIntervention(text) {
   let cleaned = cleanText(text)
   cleaned = cleaned.replace(/\s*Confirmation:\s*\{.*\}\s*$/s, '')
@@ -43,19 +41,19 @@ function RiskBadge({ level }) {
 
 function RiskGauge({ score }) {
   if (score == null) return null
-  const color = score > 60 ? '#ef4444' : score > 30 ? '#f59e0b' : '#22c55e'
-  const arcLength = (score / 100) * 251.2
+  const color = score > 60 ? '#ef4444' : score > 30 ? '#f59e0b' : '#16a34a'
+  const arcLength = Math.max((score / 100) * 251.2, 1)
   return (
     <div className="gauge-container">
       <svg viewBox="0 0 200 130" className="gauge-svg">
-        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="#f3f4f6" strokeWidth="14" strokeLinecap="round" />
+        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="#e5e7eb" strokeWidth="14" strokeLinecap="round" />
         <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke={color} strokeWidth="14" strokeLinecap="round"
           strokeDasharray={`${arcLength} 251.2`}
           style={{ transition: 'stroke-dasharray 1s ease-out' }} />
         <text x="30" y="128" fill="#9ca3af" fontSize="10" fontFamily="inherit">0</text>
         <text x="160" y="128" fill="#9ca3af" fontSize="10" fontFamily="inherit">100</text>
       </svg>
-      <div className="gauge-score" style={{ color }}>{score}</div>
+      <div className="gauge-score">{score}</div>
       <div className="gauge-sublabel">out of 100</div>
     </div>
   )
@@ -107,6 +105,9 @@ function App() {
     return p ? p.name : id
   }
 
+  const hasResult = result && result.status === 'completed'
+  const showRightPanel = loading || hasResult || error || (result && result.status === 'error')
+
   return (
     <>
       <nav className="top-bar">
@@ -129,143 +130,211 @@ function App() {
         </div>
       </nav>
 
-      <div className="app-wrapper">
-        <div className="container">
-          <h1>CarePath AI</h1>
-          <p className="subtitle">
-            AI-powered patient readmission risk assessment
-          </p>
+      <div className={`app-wrapper ${showRightPanel ? 'has-result' : ''}`}>
+        {/* Left panel: form */}
+        <div className="panel-form">
+          <div className="form-card">
+            <h1>CarePath AI</h1>
+            <p className="subtitle">AI-powered readmission risk assessment</p>
 
-          <form onSubmit={handleSubmit} className="form">
-            <div className="input-group">
-              <label htmlFor="patientId">Select Patient</label>
-              <select
-                id="patientId"
-                value={patientId}
-                onChange={(e) => setPatientId(e.target.value)}
-                required
-              >
-                <option value="" disabled>Select a patient to assess...</option>
-                {patients.map(p => (
-                  <option key={p.id} value={p.id}>
-                    {p.name} (ID: {p.id}) - Age {p.age}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button type="submit" disabled={loading || !patientId}>
-              {loading ? (
-                <span className="btn-loading">
-                  <svg className="spinner" viewBox="0 0 50 50">
-                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 31.4" opacity="0.3" />
-                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 100" strokeDashoffset="0" />
-                  </svg>
-                  Analyzing Patient...
-                </span>
-              ) : (
-                'Assess Readmission Risk'
-              )}
-            </button>
-          </form>
-
-          {error && (
-            <div className="error">
-              <strong>Error:</strong> {error}
-            </div>
-          )}
-
-          {result && result.status === 'completed' && (
-            <div className="result">
-              <div className="result-header">
-                <div>
-                  <h2>Assessment Result</h2>
-                  {result.patient_id && (
-                    <span className="patient-label">
-                      {getPatientName(result.patient_id)} ({result.patient_id})
-                    </span>
-                  )}
-                </div>
-                {result.risk_level && <RiskBadge level={result.risk_level} />}
+            <form onSubmit={handleSubmit} className="form">
+              <div className="input-group">
+                <label htmlFor="patientId">Select Patient</label>
+                <select
+                  id="patientId"
+                  value={patientId}
+                  onChange={(e) => setPatientId(e.target.value)}
+                  required
+                >
+                  <option value="" disabled>Select a patient...</option>
+                  {patients.map(p => (
+                    <option key={p.id} value={p.id}>
+                      {p.name} (ID: {p.id}) - Age {p.age}
+                    </option>
+                  ))}
+                </select>
               </div>
+              <button type="submit" disabled={loading || !patientId}>
+                {loading ? (
+                  <span className="btn-loading">
+                    <svg className="spinner" viewBox="0 0 50 50">
+                      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 31.4" opacity="0.3" />
+                      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 100" strokeDashoffset="0" />
+                    </svg>
+                    Analyzing...
+                  </span>
+                ) : (
+                  'Assess Risk'
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
 
-              <RiskGauge score={result.risk_score} />
-
-              {result.discharge_recommendation && (
-                <div className={`discharge-rec ${result.discharge_recommendation === 'hold_discharge_for_review' ? 'rec-hold' : 'rec-proceed'}`}>
-                  <div className="rec-icon">
-                    {result.discharge_recommendation === 'hold_discharge_for_review' ? '\u26A0\uFE0F' : '\u2705'}
+        {/* Right panel */}
+        {showRightPanel && (
+          <div className="panel-result">
+            {/* Loading skeleton */}
+            {loading && (
+              <div className="loading-panel">
+                <div className="loading-header">
+                  <div className="skeleton skeleton-title" />
+                  <div className="skeleton skeleton-badge" />
+                </div>
+                <div className="loading-steps">
+                  <div className="loading-step active">
+                    <div className="step-dot">
+                      <svg className="spinner-sm" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20" fill="none" stroke="#8b5cf6" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 31.4" opacity="0.3" />
+                        <circle cx="25" cy="25" r="20" fill="none" stroke="#8b5cf6" strokeWidth="5" strokeLinecap="round" strokeDasharray="31.4 100" strokeDashoffset="0" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="step-label">Analyzing discharge summary</div>
+                      <div className="step-sub">Clinical analyst reviewing patient records...</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="rec-label">Discharge Recommendation</div>
-                    <div className="rec-value">
-                      {result.discharge_recommendation === 'hold_discharge_for_review'
-                        ? 'Hold Discharge for Review'
-                        : 'Proceed with Discharge'}
+                  <div className="loading-step">
+                    <div className="step-dot pending" />
+                    <div>
+                      <div className="step-label">Reviewing patient history</div>
+                      <div className="step-sub">Historical analyst checking FHIR data...</div>
+                    </div>
+                  </div>
+                  <div className="loading-step">
+                    <div className="step-dot pending" />
+                    <div>
+                      <div className="step-label">Calculating risk score</div>
+                      <div className="step-sub">Synthesizing clinical and social factors...</div>
+                    </div>
+                  </div>
+                  <div className="loading-step">
+                    <div className="step-dot pending" />
+                    <div>
+                      <div className="step-label">Generating intervention plan</div>
+                      <div className="step-sub">Scheduling follow-ups and referrals...</div>
                     </div>
                   </div>
                 </div>
-              )}
-
-              {result.risk_factors && result.risk_factors.length > 0 && (
-                <div className="section">
-                  <h3>
-                    <span className="section-icon">{'\u26A0'}</span>
-                    Risk Factors
-                    <span className="section-count">{result.risk_factors.length}</span>
-                  </h3>
-                  <ul className="factor-list">
-                    {result.risk_factors.map((factor, i) => (
-                      <li key={i}>{cleanText(factor)}</li>
-                    ))}
-                  </ul>
+                <div className="result-top-row">
+                  <div className="card skeleton-card"><div className="skeleton skeleton-gauge" /></div>
+                  <div className="card skeleton-card"><div className="skeleton skeleton-rec" /></div>
                 </div>
-              )}
-
-              {result.intervention_plan && result.intervention_plan.length > 0 && (
-                <div className="section">
-                  <h3>
-                    <span className="section-icon">{'\u2714'}</span>
-                    Intervention Plan
-                    <span className="section-count">{result.intervention_plan.length}</span>
-                  </h3>
-                  <div className="intervention-cards">
-                    {result.intervention_plan.map((item, i) => {
-                      const meta = getInterventionMeta(item)
-                      const cleaned = cleanIntervention(item)
-                      return (
-                        <div key={i} className="intervention-card">
-                          <div className="intervention-icon-wrapper" style={{ background: `${meta.color}12`, color: meta.color }}>
-                            <span className="intervention-icon">{meta.icon}</span>
-                          </div>
-                          <div className="intervention-content">
-                            <div className="intervention-type" style={{ color: meta.color }}>{meta.label}</div>
-                            <div className="intervention-detail">{cleaned}</div>
-                          </div>
-                        </div>
-                      )
-                    })}
+                <div className="result-bottom-row">
+                  <div className="card skeleton-card">
+                    <div className="skeleton skeleton-line" />
+                    <div className="skeleton skeleton-line short" />
+                    <div className="skeleton skeleton-line" />
+                  </div>
+                  <div className="card skeleton-card">
+                    <div className="skeleton skeleton-line" />
+                    <div className="skeleton skeleton-line short" />
+                    <div className="skeleton skeleton-line" />
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {result.summary && (
-                <div className="section summary-section">
-                  <h3>
-                    <span className="section-icon">{'\u{1F4CB}'}</span>
-                    Clinical Summary
-                  </h3>
-                  <p>{cleanText(result.summary)}</p>
+            {/* Error */}
+            {!loading && (error || (result && result.status === 'error')) && (
+              <div className="error">
+                <strong>Error:</strong> {error || result?.message}
+              </div>
+            )}
+
+            {/* Results */}
+            {!loading && hasResult && (
+              <>
+                <div className="result-header-bar">
+                  <div>
+                    <h2>Risk Assessment Report</h2>
+                    <span className="patient-label">
+                      {getPatientName(result.patient_id)} ({result.patient_id})
+                    </span>
+                  </div>
+                  {result.risk_level && <RiskBadge level={result.risk_level} />}
                 </div>
-              )}
-            </div>
-          )}
 
-          {result && result.status === 'error' && (
-            <div className="error">
-              <strong>Error:</strong> {result.message}
-            </div>
-          )}
-        </div>
+                <div className="result-top-row">
+                  <div className="card score-card">
+                    <RiskGauge score={result.risk_score} />
+                  </div>
+                  {result.discharge_recommendation && (
+                    <div className={`card discharge-card ${result.discharge_recommendation === 'hold_discharge_for_review' ? 'rec-hold' : 'rec-proceed'}`}>
+                      <div className="rec-icon">
+                        {result.discharge_recommendation === 'hold_discharge_for_review' ? '\u26A0\uFE0F' : '\u2705'}
+                      </div>
+                      <div className="rec-label">Discharge Recommendation</div>
+                      <div className="rec-value">
+                        {result.discharge_recommendation === 'hold_discharge_for_review'
+                          ? 'Hold for Review'
+                          : 'Proceed with Discharge'}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="result-bottom-row">
+                  {result.risk_factors && result.risk_factors.length > 0 && (
+                    <div className="card">
+                      <h3>
+                        <span className="section-icon">{'\u26A0'}</span>
+                        Risk Factors
+                        <span className="section-count">{result.risk_factors.length}</span>
+                      </h3>
+                      <div className="card-scroll">
+                        <ul className="factor-list">
+                          {result.risk_factors.map((factor, i) => (
+                            <li key={i}>{cleanText(factor)}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {result.intervention_plan && result.intervention_plan.length > 0 && (
+                    <div className="card">
+                      <h3>
+                        <span className="section-icon">{'\u2714'}</span>
+                        Intervention Plan
+                        <span className="section-count">{result.intervention_plan.length}</span>
+                      </h3>
+                      <div className="card-scroll">
+                        <div className="intervention-cards">
+                          {result.intervention_plan.map((item, i) => {
+                            const meta = getInterventionMeta(item)
+                            const cleaned = cleanIntervention(item)
+                            return (
+                              <div key={i} className="intervention-card">
+                                <div className="intervention-icon-wrapper" style={{ background: `${meta.color}12`, color: meta.color }}>
+                                  <span className="intervention-icon">{meta.icon}</span>
+                                </div>
+                                <div className="intervention-content">
+                                  <div className="intervention-type" style={{ color: meta.color }}>{meta.label}</div>
+                                  <div className="intervention-detail">{cleaned}</div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {result.summary && (
+                  <div className="card summary-card">
+                    <h3>
+                      <span className="section-icon">{'\u{1F4CB}'}</span>
+                      Clinical Summary
+                    </h3>
+                    <p>{cleanText(result.summary)}</p>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
     </>
   )
